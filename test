@@ -1,0 +1,78 @@
+require "csv"
+
+Pitcher_Data = CSV.read('C:\Users\david\Documents\MLB\PlayerData\DataTest.csv',{ :col_sep => "\t" })
+
+p Pitcher_Data
+
+puts Pitcher_Data.class
+
+row = Pitcher_Data.find{ |r| r[0].include? 'achta001' }
+
+puts row[1]
+
+=begin
+
+class Batter
+
+	def initialize(name)
+		@name = name
+	end
+
+	def bname
+		@name
+	end
+
+
+
+end
+
+
+
+AwayTeam = ['stepg001','jeant101','matsd001','kolsh101','ranaa001','yabuy001','jewet801','matsd001','mijaj001']
+
+AwayBatter1 = Batter.new(AwayTeam[0])
+AwayBatter2 = Batter.new(AwayTeam[1])
+AwayBatter3 = Batter.new(AwayTeam[2])
+AwayBatter4 = Batter.new(AwayTeam[3])
+AwayBatter5 = Batter.new(AwayTeam[4])
+AwayBatter6 = Batter.new(AwayTeam[5])
+AwayBatter7 = Batter.new(AwayTeam[6])
+AwayBatter8 = Batter.new(AwayTeam[7])
+AwayBatter9 = Batter.new(AwayTeam[8])
+
+
+HomeTeam = ['dextc101','kriek101','anthm901','bemih101','addib101','jasoj001','chrir101','miggl101','jaimj001']
+
+HomeBatter1 = Batter.new(HomeTeam[0])
+HomeBatter2 = Batter.new(HomeTeam[1])
+HomeBatter3 = Batter.new(HomeTeam[2])
+HomeBatter4 = Batter.new(HomeTeam[3])
+HomeBatter5 = Batter.new(HomeTeam[4])
+HomeBatter6 = Batter.new(HomeTeam[5])
+HomeBatter7 = Batter.new(HomeTeam[6])
+HomeBatter8 = Batter.new(HomeTeam[7])
+HomeBatter9 = Batter.new(HomeTeam[8])
+
+
+
+puts AwayBatter1.bname
+puts AwayBatter2.bname
+puts AwayBatter3.bname
+puts AwayBatter4.bname
+puts AwayBatter5.bname
+puts AwayBatter6.bname
+puts AwayBatter7.bname
+puts AwayBatter8.bname
+puts AwayBatter9.bname
+
+
+
+puts HomeBatter1.bname
+puts HomeBatter2.bname
+puts HomeBatter3.bname
+puts HomeBatter4.bname
+puts HomeBatter5.bname
+puts HomeBatter6.bname
+puts HomeBatter7.bname
+puts HomeBatter8.bname
+puts HomeBatter9.bname
