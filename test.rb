@@ -1,21 +1,6 @@
 require "csv"
 
-
-
-Batter_Data = CSV.read('C:\Users\david\Documents\MLB\PlayerData\BatterData.csv',{ :col_sep => "\t" })
-
-
-
-puts Batter_Data.class
-
-#row = Pitcher_Data.find{ |r| r[0].include? 'achta001' }
-
-
-
-
 class Batter
-  @@batters = []
-
   attr_reader :name, :batterstrikennn, :batterstrikeynn, :batterstrikeyyn, :batterstrikeyyy, :batterstrikeyyy, :batterstrikenny, :batterstrikenyn, 
   :batterstrikeyny, :batterstrikefcnnn, :batterstrikefcynn, :batterstrikefcyyn, :batterstrikefcyyy, :batterstrikefcnyy, :batterstrikefcnny, 
   :batterstrikefcnyn, :batterstrikefcyny, :batterfoulnnn, :batterfoulynn, :batterfoulyyn, :batterfoulyyy, :batterfoulnyy, :batterfoulnny, 
@@ -36,10 +21,6 @@ class Batter
   :batterhitoutfcyny, :battersacflynnn, :battersacflyynn, :battersacflyyyn, :battersacflyyyy, :battersacflynyy, :battersacflynny, :battersacflynyn, 
   :battersacflyyny, :battersacflyfcnnn, :battersacflyfcynn, :battersacflyfcyyn, :battersacflyfcyyy, :battersacflyfcnyy, :battersacflyfcnny, :battersacflyfcnyn, 
   :battersacflyfcyny
-
-  def self.find name
-    @@batters.find { |batter| batter.name.include? name }
-  end
 
   def initialize row
     @name = row[0]
@@ -195,62 +176,45 @@ class Batter
 	@battersacflyfcnny = row[151]
 	@battersacflyfcnyn = row[152]
 	@battersacflyfcyny = row[153]
-
-    @@batters << self
   end
 end
 
-=begin
-class Team
+# Stores a bunch of batters
+class PlayerGroup
   attr_accessor :batters
 
-  def initialize Pitcher_Data
-    @batters = Pitcher_Data.map(&Batter.method(:new))
+  def initialize sheet
+    @batters = sheet.map(&Batter.method(:new))
   end
 
   def find_batter_by_name name
     batters.find { |batter| batter.name.include? 'abadf001' }
   end
 end
-=end
 
+# Hypothetical: if teams are desired, they can behave like a PlayerGroup
+class Team < PlayerGroup
+end
 
-AwayTeam = ['stepg001','jeant101','matsd001','kolsh101','ranaa001','yabuy001','jewet801','matsd001','mijaj001']
+batter_sheet = CSV.read('C:\Users\david\Documents\MLB\PlayerData\BatterData.csv', { col_sep: "\t" })
 
-AwayBatter1 = Batter.new(AwayTeam[0])
-AwayBatter2 = Batter.new(AwayTeam[1])
-AwayBatter3 = Batter.new(AwayTeam[2])
-AwayBatter4 = Batter.new(AwayTeam[3])
-AwayBatter5 = Batter.new(AwayTeam[4])
-AwayBatter6 = Batter.new(AwayTeam[5])
-AwayBatter7 = Batter.new(AwayTeam[6])
-AwayBatter8 = Batter.new(AwayTeam[7])
-AwayBatter9 = Batter.new(AwayTeam[8])
+# Example of how to find a row in the csv based on the contents of the first row
+# row = Pitcher_Data.find{ |r| r[0].include? 'achta001' }
 
-puts AwayTeam[0]
-puts AwayTeam[1]
+# Interate over the sheet and create a batter for each row. They're now stored 
+batters = PlayerGroup.new batter_sheet
 
-puts AwayBatter1.name
-puts AwayBatter2.name
+away_batter_1 = batters.find_batter_by_name('stepg001')
+away_batter_2 = batters.find_batter_by_name('jeant101')
+away_batter_3 = batters.find_batter_by_name('matsd001')
+away_batter_4 = batters.find_batter_by_name('kolsh101')
+away_batter_5 = batters.find_batter_by_name('ranaa001')
+away_batter_6 = batters.find_batter_by_name('yabuy001')
+away_batter_7 = batters.find_batter_by_name('jewet801')
+away_batter_8 = batters.find_batter_by_name('matsd001')
+away_batter_9 = batters.find_batter_by_name('mijaj001')
 
-puts AwayBatter1.batterhrfcnyy
+puts away_batter_1.name
+puts away_batter_2.name
 
-
-
-
-
-
-
-
-
-
-
-
-OUTPUT
-
-
-Array
-stepg001
-jeant101
-s
-j
+puts away_batter_1.batterhrfcnyy
